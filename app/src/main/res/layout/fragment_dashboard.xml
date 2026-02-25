@@ -4,20 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Dashboard Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dashboard"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:layout_marginBottom="16dp"/>
+            android:textColor="#000000"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="20dp" />
 
         <!-- Row 1 -->
         <LinearLayout
@@ -25,14 +29,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <!-- Today Quantity Card -->
+            <!-- Today Quantity -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
-                android:layout_height="130dp"
+                android:layout_height="140dp"
                 android:layout_weight="1"
                 android:layout_margin="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp">
+                app:cardCornerRadius="18dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="#1E1E2F">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -44,25 +49,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Today's Quantity"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp"
+                        android:textColor="@android:color/white" />
 
                     <TextView
                         android:id="@+id/tvTodayQuantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="26sp"
-                        android:textStyle="bold"/>
+                        android:text="0"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Today Revenue Card -->
+            <!-- Today Revenue -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
-                android:layout_height="130dp"
+                android:layout_height="140dp"
                 android:layout_weight="1"
                 android:layout_margin="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp">
+                app:cardCornerRadius="18dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="#2A2A40">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -74,14 +83,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Today's Revenue"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp"
+                        android:textColor="@android:color/white" />
 
                     <TextView
                         android:id="@+id/tvTodayRevenue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="26sp"
-                        android:textStyle="bold"/>
+                        android:text="₹ 0"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -96,11 +108,12 @@
             <!-- Monthly Revenue -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
-                android:layout_height="130dp"
+                android:layout_height="140dp"
                 android:layout_weight="1"
                 android:layout_margin="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp">
+                app:cardCornerRadius="18dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="#33334D">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -112,25 +125,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Monthly Revenue"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp"
+                        android:textColor="@android:color/white" />
 
                     <TextView
                         android:id="@+id/tvMonthlyRevenue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="26sp"
-                        android:textStyle="bold"/>
+                        android:text="₹ 0"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Active Users -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
-                android:layout_height="130dp"
+                android:layout_height="140dp"
                 android:layout_weight="1"
                 android:layout_margin="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp">
+                app:cardCornerRadius="18dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="#3D3D5C">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -142,14 +159,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Active Users"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp"
+                        android:textColor="@android:color/white" />
 
                     <TextView
                         android:id="@+id/tvActiveUsers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="26sp"
-                        android:textStyle="bold"/>
+                        android:text="0"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
