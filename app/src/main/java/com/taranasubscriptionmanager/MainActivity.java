@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.taranasubscriptionmanager.modelviewui.dashboard.DashboardFragment;
+import com.taranasubscriptionmanager.ui.dashboard.DashboardFragment;
 
 public class MainActivity extends AppCompatActivity {
 

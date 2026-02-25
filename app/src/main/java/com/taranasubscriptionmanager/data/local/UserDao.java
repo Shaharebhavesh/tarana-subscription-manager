@@ -19,11 +19,15 @@ public interface UserDao {
     @Update
     void update (User user);
 
-    @Query("select * from users where isActive = 1 ")
+    @Query("SELECT * FROM users WHERE isActive = 1 ORDER BY name ASC")
     LiveData<List<User>> getActiveUsers();
 
-    @Query("SELECT COUNT(*) FROM users WHERE isActive = 1")
+    @Query("UPDATE users SET isActive = 0 WHERE id = :userId")
+    void deactivateUser(int userId);
 
+    @Query("SELECT * FROM users WHERE id = :userId")
+    User getUserById(int userId);
+    @Query("SELECT COUNT(*) FROM users WHERE isActive = 1")
 
     Integer getActiveUsersCount();
 }

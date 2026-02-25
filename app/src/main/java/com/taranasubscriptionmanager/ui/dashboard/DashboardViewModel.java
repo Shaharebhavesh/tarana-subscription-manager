@@ -1,4 +1,4 @@
-package com.taranasubscriptionmanager.modelviewui.dashboard;
+package com.taranasubscriptionmanager.ui.dashboard;
 
 import android.app.Application;
 import android.os.Build;

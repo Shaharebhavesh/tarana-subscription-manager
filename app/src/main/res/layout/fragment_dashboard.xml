@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Dashboard Title -->
+        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             android:textStyle="bold"
             android:textColor="#000000"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"/>
 
         <!-- Row 1 -->
         <LinearLayout
@@ -31,10 +31,13 @@
 
             <!-- Today Quantity -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardTodayQuantity"
                 android:layout_width="0dp"
                 android:layout_height="140dp"
                 android:layout_weight="1"
                 android:layout_margin="8dp"
+                android:clickable="true"
+                android:focusable="true"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="8dp"
                 app:cardBackgroundColor="#1E1E2F">
@@ -50,7 +53,7 @@
                         android:layout_height="wrap_content"
                         android:text="Today's Quantity"
                         android:textSize="14sp"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"/>
 
                     <TextView
                         android:id="@+id/tvTodayQuantity"
@@ -59,16 +62,19 @@
                         android:text="0"
                         android:textSize="28sp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Today Revenue -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardTodayRevenue"
                 android:layout_width="0dp"
                 android:layout_height="140dp"
                 android:layout_weight="1"
                 android:layout_margin="8dp"
+                android:clickable="true"
+                android:focusable="true"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="8dp"
                 app:cardBackgroundColor="#2A2A40">
@@ -84,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:text="Today's Revenue"
                         android:textSize="14sp"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"/>
 
                     <TextView
                         android:id="@+id/tvTodayRevenue"
@@ -93,7 +99,7 @@
                         android:text="₹ 0"
                         android:textSize="28sp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -107,10 +113,13 @@
 
             <!-- Monthly Revenue -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardMonthlyRevenue"
                 android:layout_width="0dp"
                 android:layout_height="140dp"
                 android:layout_weight="1"
                 android:layout_margin="8dp"
+                android:clickable="true"
+                android:focusable="true"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="8dp"
                 app:cardBackgroundColor="#33334D">
@@ -126,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:text="Monthly Revenue"
                         android:textSize="14sp"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"/>
 
                     <TextView
                         android:id="@+id/tvMonthlyRevenue"
@@ -135,16 +144,19 @@
                         android:text="₹ 0"
                         android:textSize="28sp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Active Users -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardActiveUsers"
                 android:layout_width="0dp"
                 android:layout_height="140dp"
                 android:layout_weight="1"
                 android:layout_margin="8dp"
+                android:clickable="true"
+                android:focusable="true"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="8dp"
                 app:cardBackgroundColor="#3D3D5C">
@@ -160,7 +172,7 @@
                         android:layout_height="wrap_content"
                         android:text="Active Users"
                         android:textSize="14sp"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"/>
 
                     <TextView
                         android:id="@+id/tvActiveUsers"
@@ -169,7 +181,7 @@
                         android:text="0"
                         android:textSize="28sp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
