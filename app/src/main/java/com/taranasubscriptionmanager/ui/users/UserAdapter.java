@@ -17,10 +17,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     private List<User> userList = new ArrayList<>();
     private OnUserActionListener listener;
 
-    // ✅ INTERFACE (This was missing)
     public interface OnUserActionListener {
+
         void onEdit(User user);
+
         void onDeactivate(User user);
+
+        // quantity update callback
+        void onQuantityChanged(User user);
     }
 
     public void setListener(OnUserActionListener listener) {
@@ -35,11 +39,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         ItemUserBinding binding = ItemUserBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
                 false
         );
+
         return new UserViewHolder(binding);
     }
 
@@ -52,12 +58,70 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.binding.tvMobile.setText(user.mobile);
         holder.binding.tvAddress.setText(user.address);
 
+        // show quantities
+        holder.binding.tvTofuQty.setText(String.valueOf(user.tofuQty));
+        holder.binding.tvMilkQty.setText(String.valueOf(user.milkQty));
+
+        // TOFU +
+        holder.binding.btnTofuPlus.setOnClickListener(v -> {
+
+            user.tofuQty++;
+
+            holder.binding.tvTofuQty.setText(String.valueOf(user.tofuQty));
+
+            if (listener != null) {
+                listener.onQuantityChanged(user);
+            }
+        });
+
+        // TOFU -
+        holder.binding.btnTofuMinus.setOnClickListener(v -> {
+
+            if (user.tofuQty > 0) {
+                user.tofuQty--;
+
+                holder.binding.tvTofuQty.setText(String.valueOf(user.tofuQty));
+
+                if (listener != null) {
+                    listener.onQuantityChanged(user);
+                }
+            }
+        });
+
+        // MILK +
+        holder.binding.btnMilkPlus.setOnClickListener(v -> {
+
+            user.milkQty++;
+
+            holder.binding.tvMilkQty.setText(String.valueOf(user.milkQty));
+
+            if (listener != null) {
+                listener.onQuantityChanged(user);
+            }
+        });
+
+        // MILK -
+        holder.binding.btnMilkMinus.setOnClickListener(v -> {
+
+            if (user.milkQty > 0) {
+                user.milkQty--;
+
+                holder.binding.tvMilkQty.setText(String.valueOf(user.milkQty));
+
+                if (listener != null) {
+                    listener.onQuantityChanged(user);
+                }
+            }
+        });
+
+        // EDIT
         holder.binding.btnEdit.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onEdit(user);
             }
         });
 
+        // DEACTIVATE
         holder.binding.btnDeactivate.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onDeactivate(user);
@@ -71,6 +135,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     static class UserViewHolder extends RecyclerView.ViewHolder {
+
         ItemUserBinding binding;
 
         public UserViewHolder(ItemUserBinding binding) {

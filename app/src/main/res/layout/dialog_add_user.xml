@@ -38,15 +38,20 @@
         android:clickable="true"
         android:layout_marginTop="12dp"/>
 
-    <Spinner
-        android:id="@+id/spProduct"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
     <EditText
-        android:id="@+id/etQuantity"
+        android:id="@+id/etTofuQty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Daily Quantity"
-        android:inputType="number"/>
+        android:hint="Tofu Quantity"
+        android:inputType="number"
+        android:layout_marginTop="12dp"/>
+
+    <EditText
+        android:id="@+id/etMilkQty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Milk Quantity"
+        android:inputType="number"
+        android:layout_marginTop="12dp"/>
+
 </LinearLayout>

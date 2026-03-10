@@ -4,9 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.taranasubscriptionmanager.R;
@@ -25,19 +23,8 @@ public class AddUserDialog {
         EditText etMobile = view.findViewById(R.id.etMobile);
         EditText etAddress = view.findViewById(R.id.etAddress);
         EditText etStartDate = view.findViewById(R.id.etStartDate);
-        EditText etQuantity = view.findViewById(R.id.etQuantity);
-
-        Spinner spProduct = view.findViewById(R.id.spProduct);
-
-        String[] products = {"Tofu", "Soy Milk"};
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                context,
-                android.R.layout.simple_spinner_dropdown_item,
-                products
-        );
-
-        spProduct.setAdapter(adapter);
+        EditText etTofuQty = view.findViewById(R.id.etTofuQty);
+        EditText etMilkQty = view.findViewById(R.id.etMilkQty);
 
         new AlertDialog.Builder(context)
                 .setTitle("Add New Customer")
@@ -48,12 +35,16 @@ public class AddUserDialog {
                     String mobile = etMobile.getText().toString().trim();
                     String address = etAddress.getText().toString().trim();
                     String startDate = etStartDate.getText().toString().trim();
-                    String product = spProduct.getSelectedItem().toString();
 
-                    int quantity = 0;
+                    int tofuQty = 0;
+                    int milkQty = 0;
 
-                    if (!etQuantity.getText().toString().isEmpty()) {
-                        quantity = Integer.parseInt(etQuantity.getText().toString());
+                    if (!etTofuQty.getText().toString().isEmpty()) {
+                        tofuQty = Integer.parseInt(etTofuQty.getText().toString());
+                    }
+
+                    if (!etMilkQty.getText().toString().isEmpty()) {
+                        milkQty = Integer.parseInt(etMilkQty.getText().toString());
                     }
 
                     viewModel.addUser(
@@ -61,8 +52,8 @@ public class AddUserDialog {
                             mobile,
                             address,
                             startDate,
-                            product,
-                            quantity
+                            tofuQty,
+                            milkQty
                     );
 
                     Toast.makeText(context,
@@ -86,26 +77,15 @@ public class AddUserDialog {
         EditText etMobile = view.findViewById(R.id.etMobile);
         EditText etAddress = view.findViewById(R.id.etAddress);
         EditText etStartDate = view.findViewById(R.id.etStartDate);
-        EditText etQuantity = view.findViewById(R.id.etQuantity);
+        EditText etTofuQty = view.findViewById(R.id.etTofuQty);
+        EditText etMilkQty = view.findViewById(R.id.etMilkQty);
 
-        Spinner spProduct = view.findViewById(R.id.spProduct);
-
-        String[] products = {"Tofu", "Soy Milk"};
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                context,
-                android.R.layout.simple_spinner_dropdown_item,
-                products
-        );
-
-        spProduct.setAdapter(adapter);
-
-        // Fill existing values
         etName.setText(user.name);
         etMobile.setText(user.mobile);
         etAddress.setText(user.address);
         etStartDate.setText(user.startDate);
-        etQuantity.setText(String.valueOf(user.quantity));
+        etTofuQty.setText(String.valueOf(user.tofuQty));
+        etMilkQty.setText(String.valueOf(user.milkQty));
 
         new AlertDialog.Builder(context)
                 .setTitle("Edit Customer")
@@ -116,15 +96,21 @@ public class AddUserDialog {
                     user.mobile = etMobile.getText().toString();
                     user.address = etAddress.getText().toString();
                     user.startDate = etStartDate.getText().toString();
-                    user.product = spProduct.getSelectedItem().toString();
-//                    user.quantity = Integer.parseInt(etQuantity.getText().toString());
-                    int quantity = 0;
 
-                    if (!etQuantity.getText().toString().isEmpty()) {
-                        quantity = Integer.parseInt(etQuantity.getText().toString());
+                    int tofuQty = 0;
+                    int milkQty = 0;
+
+                    if (!etTofuQty.getText().toString().isEmpty()) {
+                        tofuQty = Integer.parseInt(etTofuQty.getText().toString());
                     }
 
-                    user.quantity = quantity;
+                    if (!etMilkQty.getText().toString().isEmpty()) {
+                        milkQty = Integer.parseInt(etMilkQty.getText().toString());
+                    }
+
+                    user.tofuQty = tofuQty;
+                    user.milkQty = milkQty;
+
                     viewModel.updateUser(user);
 
                     Toast.makeText(context,

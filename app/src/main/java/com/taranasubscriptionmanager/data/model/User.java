@@ -14,29 +14,28 @@ public class User {
     public String address;
     public String startDate;
 
-    public String product;
-    public int quantity;
+    // product quantities
+    public int tofuQty;
+    public int milkQty;
 
     public boolean isActive = true;
 
-    // NEW FIELD
     public long createdAt;
 
     public User(String name,
                 String mobile,
                 String address,
                 String startDate,
-                String product,
-                int quantity) {
+                int tofuQty,
+                int milkQty) {
 
         this.name = name;
         this.mobile = mobile;
         this.address = address;
         this.startDate = startDate;
-        this.product = product;
-        this.quantity = quantity;
+        this.tofuQty = tofuQty;
+        this.milkQty = milkQty;
 
-        // Save creation time
         this.createdAt = System.currentTimeMillis();
     }
 }

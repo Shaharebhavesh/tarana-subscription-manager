@@ -60,10 +60,17 @@ public class UserFragment extends Fragment {
             public void onDeactivate(User user) {
                 viewModel.deactivateUser(user);
             }
+
+            @Override
+            public void onQuantityChanged(User user) {
+                // update tofu / milk quantity in database
+                viewModel.updateUser(user);
+            }
         });
     }
 
     private void observeUsers() {
+
         viewModel.getActiveUsers().observe(getViewLifecycleOwner(),
                 users -> adapter.submitList(users));
     }

@@ -13,7 +13,6 @@ import com.taranasubscriptionmanager.data.model.User;
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
-
     public abstract DeliveryDao deliveryDao();
 
     private static volatile AppDatabase INSTANCE;
@@ -24,6 +23,7 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (AppDatabase.class) {
 
                 if (INSTANCE == null) {
+
                     INSTANCE = Room.databaseBuilder(
                                     context.getApplicationContext(),
                                     AppDatabase.class,
@@ -31,6 +31,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             )
                             .fallbackToDestructiveMigration()
                             .build();
+
                 }
             }
         }

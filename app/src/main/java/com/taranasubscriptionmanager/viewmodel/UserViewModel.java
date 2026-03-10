@@ -27,21 +27,20 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     // ADD USER
-    // ADD USER
     public void addUser(String name,
                         String mobile,
                         String address,
                         String startDate,
-                        String product,
-                        int quantity) {
+                        int tofuQty,
+                        int milkQty) {
 
         User user = new User(
                 name,
                 mobile,
                 address,
                 startDate,
-                product,
-                quantity
+                tofuQty,
+                milkQty
         );
 
         repository.insert(user);
