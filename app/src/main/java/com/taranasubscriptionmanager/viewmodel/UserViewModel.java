@@ -12,36 +12,59 @@ import com.taranasubscriptionmanager.data.repository.UserRepository;
 import java.util.List;
 
 public class UserViewModel extends AndroidViewModel {
-    private final UserRepository repository;
-    private final LiveData<List<User>>activeUsers;
 
-    public UserViewModel(@NonNull Application application){
+    private final UserRepository repository;
+    private final LiveData<List<User>> allUsers;
+
+    public UserViewModel(@NonNull Application application) {
         super(application);
         repository = new UserRepository(application);
-        activeUsers = repository.getActiveUsers();
-    }
-    public LiveData<List<User>>getActiveUsers(){
-        return activeUsers;
+        allUsers = repository.getAllUsers();
     }
 
-    public void addUser(String name,String mobile,String address){
-        User user=new User();
-        user.name=name;
-        user.mobile=mobile;
-        user.address=address;
-        user.isActive=true;
-        user.createdAt=System.currentTimeMillis();
+    public LiveData<List<User>> getAllUsers() {
+        return allUsers;
+    }
+
+    // ADD USER
+    // ADD USER
+    public void addUser(String name,
+                        String mobile,
+                        String address,
+                        String startDate,
+                        String product,
+                        int quantity) {
+
+        User user = new User(
+                name,
+                mobile,
+                address,
+                startDate,
+                product,
+                quantity
+        );
 
         repository.insert(user);
     }
 
-    public void updateUser(User user){
+    // UPDATE USER
+    public void updateUser(User user) {
         repository.update(user);
     }
 
-    public void deactivateUser(int userId){
-        repository.deactivate(userId);
+    // DELETE USER
+    public void deleteUser(User user) {
+        repository.delete(user);
     }
 
+    // DEACTIVATE USER
+    public void deactivateUser(User user) {
+        user.isActive = false;
+        repository.update(user);
+    }
 
+    // GET ACTIVE USERS
+    public LiveData<List<User>> getActiveUsers() {
+        return repository.getActiveUsers();
+    }
 }

@@ -12,14 +12,15 @@ public interface DeliveryDao {
     @Insert
     void insert(Delivery delivery);
 
-    @Query("select sum(totalAmount)from deliveries where date between :start and :end")
-    double getMonthlyRevenue(long start, long end);
+    // Monthly revenue
+    @Query("SELECT SUM(totalAmount) FROM deliveries WHERE date BETWEEN :start AND :end")
+    Double getMonthlyRevenue(long start, long end);
 
-    @Query("select sum(quantity) from deliveries where date =:today")
-    int getTodayTotal(long today);
+    // Today's total quantity
+    @Query("SELECT SUM(quantity) FROM deliveries WHERE date = :today")
+    Integer getTodayTotal(long today);
 
+    // Today's revenue
     @Query("SELECT SUM(totalAmount) FROM deliveries WHERE date = :today")
-
-
     Double getTodayRevenue(long today);
 }

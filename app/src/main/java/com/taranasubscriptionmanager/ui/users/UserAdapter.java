@@ -20,7 +20,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     // ✅ INTERFACE (This was missing)
     public interface OnUserActionListener {
         void onEdit(User user);
-        void onDeactivate(int userId);
+        void onDeactivate(User user);
     }
 
     public void setListener(OnUserActionListener listener) {
@@ -60,7 +60,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
         holder.binding.btnDeactivate.setOnClickListener(v -> {
             if (listener != null) {
-                listener.onDeactivate(user.id);
+                listener.onDeactivate(user);
             }
         });
     }

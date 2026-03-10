@@ -5,46 +5,52 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.taranasubscriptionmanager.data.local.AppDatabase;
+import com.taranasubscriptionmanager.data.local.UserDao;
 import com.taranasubscriptionmanager.data.model.User;
 
 import java.util.List;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.Consumer;
 
 public class UserRepository {
-    private final AppDatabase db;
-    private final ExecutorService executor;
 
-    public UserRepository(Application application){
-        db = AppDatabase.getDatabase(application);
-        executor = Executors.newSingleThreadExecutor();
-    }
-    public LiveData<List<User>>getActiveUsers(){
-        return db.userDao().getActiveUsers();
-    }
+    private final UserDao userDao;
+    private final LiveData<List<User>> allUsers;
 
-    public void insert(User user){
-        executor.execute(()->db.userDao().insert(user));
-    }
+    private final ExecutorService executorService =
+            Executors.newSingleThreadExecutor();
 
-    public void update(User user){
-        executor.execute(()->db.userDao().update(user));
+    public UserRepository(Application application) {
+
+        // FIX: use getDatabase() instead of getInstance()
+        AppDatabase db = AppDatabase.getDatabase(application);
+
+        userDao = db.userDao();
+        allUsers = userDao.getAllUsers();
     }
 
-    public void deactivate(int userId){
-        executor.execute(()->db.userDao().deactivateUser(userId));
+    // GET ALL USERS
+    public LiveData<List<User>> getAllUsers() {
+        return allUsers;
     }
 
-    public void getUser(int userId, Consumer<User>callback){
-        executor.execute(()->{
-            User user=db.userDao().getUserById(userId);
-            callback.accept(user);
-        });
+    // INSERT USER
+    public void insert(User user) {
+        executorService.execute(() -> userDao.insert(user));
     }
 
+    // UPDATE USER
+    public void update(User user) {
+        executorService.execute(() -> userDao.update(user));
+    }
 
+    // DELETE USER
+    public void delete(User user) {
+        executorService.execute(() -> userDao.delete(user));
+    }
 
-
+    // GET ACTIVE USERS
+    public LiveData<List<User>> getActiveUsers() {
+        return userDao.getActiveUsers();
+    }
 }

@@ -41,7 +41,7 @@ public class DashboardViewModel extends AndroidViewModel {
             int qty =db.deliveryDao().getTodayTotal(today);
             double monthRev=db.deliveryDao().getMonthlyRevenue(start,end);
 
-            Integer userCount =db.userDao().getActiveUsersCount();
+            Integer userCount = db.userDao().getActiveUsersCount().getValue();
 
             todayQuantity.postValue(qty);
             monthlyRevenue.postValue(monthRev);

@@ -29,8 +29,8 @@ public class UserFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        setupRecycler();     // 👈 CALL HERE
-        observeUsers();      // 👈 AND HERE
+        setupRecycler();
+        observeUsers();
 
         binding.btnAddUser.setOnClickListener(v ->
                 AddUserDialog.show(requireContext(), viewModel)
@@ -39,7 +39,6 @@ public class UserFragment extends Fragment {
         return binding.getRoot();
     }
 
-    // 🔥 ADD THIS METHOD HERE
     private void setupRecycler() {
 
         adapter = new UserAdapter();
@@ -51,14 +50,15 @@ public class UserFragment extends Fragment {
         binding.recyclerUsers.setAdapter(adapter);
 
         adapter.setListener(new UserAdapter.OnUserActionListener() {
+
             @Override
             public void onEdit(User user) {
                 AddUserDialog.showEdit(requireContext(), viewModel, user);
             }
 
             @Override
-            public void onDeactivate(int userId) {
-                viewModel.deactivateUser(userId);
+            public void onDeactivate(User user) {
+                viewModel.deactivateUser(user);
             }
         });
     }
