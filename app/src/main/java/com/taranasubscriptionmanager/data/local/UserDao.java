@@ -49,4 +49,13 @@ public interface UserDao {
 
     @Query("SELECT COUNT(*) FROM users WHERE isActive = 1")
     LiveData<Integer> getActiveUsersCount();
+
+    @Query("SELECT SUM(tofuQty) FROM users WHERE isActive = 1")
+    LiveData<Integer> getTotalTofuRequired();
+
+    @Query("SELECT SUM(milkQty) FROM users WHERE isActive = 1")
+    LiveData<Integer> getTotalMilkRequired();
+
+
+
 }

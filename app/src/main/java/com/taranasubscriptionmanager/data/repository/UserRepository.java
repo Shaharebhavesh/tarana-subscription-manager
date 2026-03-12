@@ -53,4 +53,18 @@ public class UserRepository {
     public LiveData<List<User>> getActiveUsers() {
         return userDao.getActiveUsers();
     }
+
+    public LiveData<Integer> getTotalTofuRequired() {
+        return userDao.getTotalTofuRequired();
+    }
+
+    public LiveData<Integer> getTotalMilkRequired() {
+        return userDao.getTotalMilkRequired();
+    }
+
+    public LiveData<Integer> getActiveUsersCount() {
+        return userDao.getActiveUsersCount();
+    }
+
+
 }

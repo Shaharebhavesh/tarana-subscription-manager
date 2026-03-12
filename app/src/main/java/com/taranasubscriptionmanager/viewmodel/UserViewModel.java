@@ -66,4 +66,17 @@ public class UserViewModel extends AndroidViewModel {
     public LiveData<List<User>> getActiveUsers() {
         return repository.getActiveUsers();
     }
+
+    public LiveData<Integer> getTotalTofuRequired() {
+        return repository.getTotalTofuRequired();
+    }
+
+    public LiveData<Integer> getTotalMilkRequired() {
+        return repository.getTotalMilkRequired();
+    }
+
+    public LiveData<Integer> getActiveUsersCount() {
+        return repository.getActiveUsersCount();
+    }
+
 }
