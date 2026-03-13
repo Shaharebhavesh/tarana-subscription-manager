@@ -25,7 +25,7 @@ public class DashboardFragment extends Fragment {
     private TextView tvTodayRevenue;
     private TextView tvActiveUsers;
 
-    public DashboardFragment() {}
+    public DashboardFragment(){}
 
     @Nullable
     @Override
@@ -37,37 +37,36 @@ public class DashboardFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        // TextViews
         tvTofuQuantity = view.findViewById(R.id.tvTofuQuantity);
         tvMilkQuantity = view.findViewById(R.id.tvMilkQuantity);
         tvTodayRevenue = view.findViewById(R.id.tvTodayRevenue);
         tvActiveUsers = view.findViewById(R.id.tvActiveUsers);
 
-        // Cards
         MaterialCardView cardTofu = view.findViewById(R.id.cardTofu);
         MaterialCardView cardMilk = view.findViewById(R.id.cardMilk);
         MaterialCardView cardRevenue = view.findViewById(R.id.cardRevenue);
         MaterialCardView cardUsers = view.findViewById(R.id.cardUsers);
 
-        // Observe tofu quantity
         viewModel.getTotalTofuRequired().observe(getViewLifecycleOwner(), qty -> {
-            if (qty == null) qty = 0;
+            if(qty == null) qty = 0;
             tvTofuQuantity.setText(String.valueOf(qty));
         });
 
-        // Observe milk quantity
         viewModel.getTotalMilkRequired().observe(getViewLifecycleOwner(), qty -> {
-            if (qty == null) qty = 0;
+            if(qty == null) qty = 0;
             tvMilkQuantity.setText(String.valueOf(qty));
         });
 
-        // Observe active users
         viewModel.getActiveUsersCount().observe(getViewLifecycleOwner(), count -> {
-            if (count == null) count = 0;
+            if(count == null) count = 0;
             tvActiveUsers.setText(String.valueOf(count));
         });
 
-        // Click actions
+        viewModel.getTodayRevenue().observe(getViewLifecycleOwner(), value -> {
+            if(value == null) value = 0;
+            tvTodayRevenue.setText("₹ " + value);
+        });
+
         cardTofu.setOnClickListener(v ->
                 Toast.makeText(getContext(),"Tofu Production",Toast.LENGTH_SHORT).show());
 
@@ -75,7 +74,7 @@ public class DashboardFragment extends Fragment {
                 Toast.makeText(getContext(),"Milk Production",Toast.LENGTH_SHORT).show());
 
         cardRevenue.setOnClickListener(v ->
-                Toast.makeText(getContext(),"Open Billing Screen",Toast.LENGTH_SHORT).show());
+                Toast.makeText(getContext(),"Revenue Details",Toast.LENGTH_SHORT).show());
 
         cardUsers.setOnClickListener(v ->
                 Toast.makeText(getContext(),"Open Users Screen",Toast.LENGTH_SHORT).show());

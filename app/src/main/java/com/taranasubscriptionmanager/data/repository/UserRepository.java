@@ -5,7 +5,9 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.taranasubscriptionmanager.data.local.AppDatabase;
+import com.taranasubscriptionmanager.data.local.DeliveryDao;
 import com.taranasubscriptionmanager.data.local.UserDao;
+import com.taranasubscriptionmanager.data.model.Delivery;
 import com.taranasubscriptionmanager.data.model.User;
 
 import java.util.List;
@@ -15,6 +17,8 @@ import java.util.concurrent.Executors;
 public class UserRepository {
 
     private final UserDao userDao;
+    private final DeliveryDao deliveryDao;
+
     private final LiveData<List<User>> allUsers;
 
     private final ExecutorService executorService =
@@ -22,10 +26,11 @@ public class UserRepository {
 
     public UserRepository(Application application) {
 
-        // FIX: use getDatabase() instead of getInstance()
         AppDatabase db = AppDatabase.getDatabase(application);
 
         userDao = db.userDao();
+        deliveryDao = db.deliveryDao();
+
         allUsers = userDao.getAllUsers();
     }
 
@@ -54,17 +59,49 @@ public class UserRepository {
         return userDao.getActiveUsers();
     }
 
+    // TOTAL TOFU REQUIRED
     public LiveData<Integer> getTotalTofuRequired() {
         return userDao.getTotalTofuRequired();
     }
 
+    // TOTAL MILK REQUIRED
     public LiveData<Integer> getTotalMilkRequired() {
         return userDao.getTotalMilkRequired();
     }
 
+    // ACTIVE USERS COUNT
     public LiveData<Integer> getActiveUsersCount() {
         return userDao.getActiveUsersCount();
     }
 
+    // GENERATE TODAY DELIVERIES
+    public void generateTodayDeliveries(List<User> users){
+
+        long today = System.currentTimeMillis();
+
+        executorService.execute(() -> {
+
+            if(deliveryDao.getTodayDeliveryCount(today) > 0){
+                return;
+            }
+
+            for(User user : users){
+
+                Delivery delivery = new Delivery();
+
+                delivery.userId = user.id;
+                delivery.date = today;
+                delivery.tofuQty = user.tofuQty;
+                delivery.milkQty = user.milkQty;
+
+                delivery.totalAmount =
+                        (user.tofuQty * 50) +
+                                (user.milkQty * 15);
+
+                deliveryDao.insert(delivery);
+            }
+
+        });
+    }
 
 }

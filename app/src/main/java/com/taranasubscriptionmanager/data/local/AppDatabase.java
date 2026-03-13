@@ -9,10 +9,11 @@ import androidx.room.RoomDatabase;
 import com.taranasubscriptionmanager.data.model.Delivery;
 import com.taranasubscriptionmanager.data.model.User;
 
-@Database(entities = {User.class, Delivery.class}, version = 4)
+@Database(entities = {User.class, Delivery.class}, version = 6)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
+
     public abstract DeliveryDao deliveryDao();
 
     private static volatile AppDatabase INSTANCE;
@@ -20,6 +21,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase getDatabase(Context context) {
 
         if (INSTANCE == null) {
+
             synchronized (AppDatabase.class) {
 
                 if (INSTANCE == null) {

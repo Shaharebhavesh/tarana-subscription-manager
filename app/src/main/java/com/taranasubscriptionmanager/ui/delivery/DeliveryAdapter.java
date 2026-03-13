@@ -14,50 +14,59 @@ import com.taranasubscriptionmanager.data.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.ViewHolder>{
+public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.DeliveryViewHolder> {
 
-    private List<User> users = new ArrayList<>();
+    private List<User> userList = new ArrayList<>();
 
-    public void setUsers(List<User> list){
-        users = list;
+
+    public void setUsers(List<User> users) {
+        this.userList = users;
         notifyDataSetChanged();
     }
 
+
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,int viewType){
+    public DeliveryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_delivery,parent,false);
+                .inflate(R.layout.item_delivery, parent, false);
 
-        return new ViewHolder(view);
+        return new DeliveryViewHolder(view);
     }
+
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder,int position){
+    public void onBindViewHolder(@NonNull DeliveryViewHolder holder, int position) {
 
-        User user = users.get(position);
+        User user = userList.get(position);
 
-        holder.name.setText(user.name);
+        holder.tvCustomerName.setText(user.name);
 
-        holder.qty.setText(
-                "Tofu: "+user.tofuQty+"   Milk: "+user.milkQty
-        );
+        holder.tvTofuQty.setText("Tofu: " + user.tofuQty);
+
+        holder.tvMilkQty.setText("Milk: " + user.milkQty);
     }
+
 
     @Override
-    public int getItemCount(){
-        return users.size();
+    public int getItemCount() {
+        return userList.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView name,qty;
+    static class DeliveryViewHolder extends RecyclerView.ViewHolder {
 
-        ViewHolder(View v){
-            super(v);
-            name = v.findViewById(R.id.tvName);
-            qty = v.findViewById(R.id.tvQty);
+        TextView tvCustomerName;
+        TextView tvTofuQty;
+        TextView tvMilkQty;
+
+        public DeliveryViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            tvCustomerName = itemView.findViewById(R.id.tvCustomerName);
+            tvTofuQty = itemView.findViewById(R.id.tvTofuQty);
+            tvMilkQty = itemView.findViewById(R.id.tvMilkQty);
         }
     }
 }

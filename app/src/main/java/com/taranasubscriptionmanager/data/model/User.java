@@ -20,6 +20,8 @@ public class User {
 
     public boolean isActive = true;
 
+    public int tofuPrice = 50;
+    public int milkPrice = 15;
     public long createdAt;
 
     public User(String name,
@@ -37,5 +39,8 @@ public class User {
         this.milkQty = milkQty;
 
         this.createdAt = System.currentTimeMillis();
+
+
+
     }
 }

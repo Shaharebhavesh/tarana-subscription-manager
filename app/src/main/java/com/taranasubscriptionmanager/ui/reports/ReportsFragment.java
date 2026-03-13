@@ -6,29 +6,56 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.taranasubscriptionmanager.R;
+import com.taranasubscriptionmanager.viewmodel.UserViewModel;
 
 public class ReportsFragment extends Fragment {
 
-    public ReportsFragment(){}
+    private UserViewModel viewModel;
 
-    @Nullable
+    private TextView tvTofu;
+    private TextView tvMilk;
+    private TextView tvDeliveries;
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
-                             Bundle savedInstanceState){
+                             Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_reports,container,false);
+        View view = inflater.inflate(R.layout.fragment_reports, container, false);
 
-        TextView today = view.findViewById(R.id.tvTodayRevenue);
-        TextView monthly = view.findViewById(R.id.tvMonthlyRevenue);
+        viewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        today.setText("Today's Revenue : ₹0");
-        monthly.setText("Monthly Revenue : ₹0");
+        tvTofu = view.findViewById(R.id.tvTofu);
+        tvMilk = view.findViewById(R.id.tvMilk);
+        tvDeliveries = view.findViewById(R.id.tvDeliveries);
+
+        viewModel.getTotalTofuRequired().observe(getViewLifecycleOwner(), value -> {
+
+            if(value == null) value = 0;
+
+            tvTofu.setText(String.valueOf(value));
+
+        });
+
+        viewModel.getTotalMilkRequired().observe(getViewLifecycleOwner(), value -> {
+
+            if(value == null) value = 0;
+
+            tvMilk.setText(String.valueOf(value));
+
+        });
+
+        viewModel.getActiveUsersCount().observe(getViewLifecycleOwner(), value -> {
+
+            if(value == null) value = 0;
+
+            tvDeliveries.setText(String.valueOf(value));
+
+        });
 
         return view;
     }

@@ -8,12 +8,21 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Today's Delivery"
+        android:text="Total Delivery "
         android:textSize="22sp"
         android:textStyle="bold"
         android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnStartDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start New Day"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#4A6CF7"
+        android:textColor="@android:color/white"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerDelivery"

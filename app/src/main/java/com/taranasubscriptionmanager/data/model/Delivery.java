@@ -13,5 +13,7 @@ public class Delivery {
     public int quantity;
     public double totalAmount;
     public long date;
+    public int tofuQty;
 
+    public int milkQty;
 }
