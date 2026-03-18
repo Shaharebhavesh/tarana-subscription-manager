@@ -2,32 +2,75 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="#F5F6FA"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="Total Delivery "
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <!-- 🔥 HEADER CARD -->
 
-    <Button
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/dashboard_header"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delivery Manager"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Manage today’s deliveries"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="4dp"/>
+
+    </LinearLayout>
+
+
+    <!-- 🔘 BUTTON -->
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnStartDay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Start New Day"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="#4A6CF7"
-        android:textColor="@android:color/white"/>
+        android:layout_height="52dp"
+        android:text="Generate Today's Deliveries"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"
+        app:cornerRadius="12dp"
+        android:backgroundTint="#4A6CF7"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerDelivery"
+
+    <!-- 📦 DELIVERY LIST -->
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
+        app:cardBackgroundColor="@android:color/white">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerDelivery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"/>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
