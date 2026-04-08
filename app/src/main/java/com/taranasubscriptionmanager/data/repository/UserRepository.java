@@ -3,6 +3,10 @@ package com.taranasubscriptionmanager.data.repository;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
+import androidx.paging.PagingConfig;
+import androidx.paging.PagingData;
+import androidx.paging.PagingLiveData;
+import androidx.paging.Pager;
 
 import com.taranasubscriptionmanager.data.local.AppDatabase;
 import com.taranasubscriptionmanager.data.local.DeliveryDao;
@@ -74,6 +78,21 @@ public class UserRepository {
         return userDao.getActiveUsersCount();
     }
 
+    // ✅ PAGINATION (FIXED)
+    public LiveData<PagingData<User>> getPagedUsers() {
+
+        Pager<Integer, User> pager = new Pager<>(
+                new PagingConfig(
+                        10,     // page size
+                        10,
+                        false
+                ),
+                () -> userDao.getPagedUsers()
+        );
+
+        return PagingLiveData.getLiveData(pager);
+    }
+
     // GENERATE TODAY DELIVERIES
     public void generateTodayDeliveries(List<User> users){
 
@@ -103,5 +122,4 @@ public class UserRepository {
 
         });
     }
-
 }

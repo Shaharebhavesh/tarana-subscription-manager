@@ -9,7 +9,9 @@ import androidx.room.RoomDatabase;
 import com.taranasubscriptionmanager.data.model.Delivery;
 import com.taranasubscriptionmanager.data.model.User;
 
-@Database(entities = {User.class, Delivery.class}, version = 6)
+@Database(entities = {User.class, Delivery.class},
+        version = 6,
+        exportSchema = false  )
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();

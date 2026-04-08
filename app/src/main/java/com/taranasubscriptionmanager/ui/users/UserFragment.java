@@ -71,7 +71,11 @@ public class UserFragment extends Fragment {
 
     private void observeUsers() {
 
-        viewModel.getActiveUsers().observe(getViewLifecycleOwner(),
-                users -> adapter.submitList(users));
+//        viewModel.getActiveUsers().observe(getViewLifecycleOwner(),
+//                users -> adapter.submitList(users));
+        viewModel.getPagedUsers().observe(getViewLifecycleOwner(), pagingData -> {
+            adapter.submitData(getLifecycle(), pagingData);
+        });
+
     }
 }

@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.paging.PagingData;
+
 
 import com.taranasubscriptionmanager.data.model.User;
 import com.taranasubscriptionmanager.data.repository.UserRepository;
@@ -46,6 +48,12 @@ public class UserViewModel extends AndroidViewModel {
 
         repository.insert(user);
     }
+
+//    pagination
+public LiveData<PagingData<User>> getPagedUsers() {
+    return repository.getPagedUsers();
+}
+
 
     public void generateTodayDeliveries(List<User> users){
         repository.generateTodayDeliveries(users);

@@ -4,17 +4,15 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.paging.PagingDataAdapter;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.taranasubscriptionmanager.data.model.User;
 import com.taranasubscriptionmanager.databinding.ItemUserBinding;
 
-import java.util.ArrayList;
-import java.util.List;
+public class UserAdapter extends PagingDataAdapter<User, UserAdapter.UserViewHolder> {
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
-
-    private List<User> userList = new ArrayList<>();
     private OnUserActionListener listener;
 
     public interface OnUserActionListener {
@@ -23,7 +21,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
         void onDeactivate(User user);
 
-        // quantity update callback
         void onQuantityChanged(User user);
     }
 
@@ -31,10 +28,22 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         this.listener = listener;
     }
 
-    public void submitList(List<User> users) {
-        userList = users;
-        notifyDataSetChanged();
+    public UserAdapter() {
+        super(DIFF_CALLBACK);
     }
+
+    private static final DiffUtil.ItemCallback<User> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<User>() {
+                @Override
+                public boolean areItemsTheSame(@NonNull User oldItem, @NonNull User newItem) {
+                    return oldItem.id == newItem.id;
+                }
+
+                @Override
+                public boolean areContentsTheSame(@NonNull User oldItem, @NonNull User newItem) {
+                    return oldItem.equals(newItem);
+                }
+            };
 
     @NonNull
     @Override
@@ -52,86 +61,62 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
 
-        User user = userList.get(position);
+        User user = getItem(position);
+
+        if (user == null) return;
 
         holder.binding.tvName.setText(user.name);
         holder.binding.tvMobile.setText(user.mobile);
         holder.binding.tvAddress.setText(user.address);
 
-        // show quantities
         holder.binding.tvTofuQty.setText(String.valueOf(user.tofuQty));
         holder.binding.tvMilkQty.setText(String.valueOf(user.milkQty));
 
         // TOFU +
         holder.binding.btnTofuPlus.setOnClickListener(v -> {
-
             user.tofuQty++;
-
             holder.binding.tvTofuQty.setText(String.valueOf(user.tofuQty));
 
-            if (listener != null) {
-                listener.onQuantityChanged(user);
-            }
+            if (listener != null) listener.onQuantityChanged(user);
         });
 
         // TOFU -
         holder.binding.btnTofuMinus.setOnClickListener(v -> {
-
             if (user.tofuQty > 0) {
                 user.tofuQty--;
-
                 holder.binding.tvTofuQty.setText(String.valueOf(user.tofuQty));
 
-                if (listener != null) {
-                    listener.onQuantityChanged(user);
-                }
+                if (listener != null) listener.onQuantityChanged(user);
             }
         });
 
         // MILK +
         holder.binding.btnMilkPlus.setOnClickListener(v -> {
-
             user.milkQty++;
-
             holder.binding.tvMilkQty.setText(String.valueOf(user.milkQty));
 
-            if (listener != null) {
-                listener.onQuantityChanged(user);
-            }
+            if (listener != null) listener.onQuantityChanged(user);
         });
 
         // MILK -
         holder.binding.btnMilkMinus.setOnClickListener(v -> {
-
             if (user.milkQty > 0) {
                 user.milkQty--;
-
                 holder.binding.tvMilkQty.setText(String.valueOf(user.milkQty));
 
-                if (listener != null) {
-                    listener.onQuantityChanged(user);
-                }
+                if (listener != null) listener.onQuantityChanged(user);
             }
         });
 
         // EDIT
         holder.binding.btnEdit.setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onEdit(user);
-            }
+            if (listener != null) listener.onEdit(user);
         });
 
         // DEACTIVATE
         holder.binding.btnDeactivate.setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onDeactivate(user);
-            }
+            if (listener != null) listener.onDeactivate(user);
         });
-    }
-
-    @Override
-    public int getItemCount() {
-        return userList.size();
     }
 
     static class UserViewHolder extends RecyclerView.ViewHolder {
